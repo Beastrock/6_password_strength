@@ -1,5 +1,3 @@
-
-
 def get_password_strength(password):
     pass
 
