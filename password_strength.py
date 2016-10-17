@@ -5,4 +5,4 @@ def get_password_strength(password):
 
 
 if __name__ == '__main__':
-    print("Hello,bitchesssss")
+    print("Hello,bitchessssssss")
