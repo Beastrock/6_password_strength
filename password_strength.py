@@ -4,4 +4,4 @@ def get_password_strength(password):
 
 if __name__ == '__main__':
     print("Hello,bitchessssssss")
-    print("testing the pycharm pushing to giithub epta!")
+    print("testing the pycharm pushing to giithub eptna!")
