@@ -9,11 +9,12 @@ def upload_pass_base(fp):
 
 # checking passwords for the presence of spaces and tabs
 def input_correct_password():
-    FOUR_LETTERS = 4
-    password = input('Input your password:\n')
-    if ' ' in password or len(password) < FOUR_LETTERS:
-        print("Uncorrect input: spaces are not allowed")
-        input_correct_password()
+    FOUR_SYMBOLS = 4
+    password = ''
+    while ((' ' in password) or len(password)) < FOUR_SYMBOLS:
+        print("Uncorrect input: using spaces or less then 4 symbols ")
+        password = input('Input your password:\n')
+        return None
     return password
 
 def get_password_strength(password):
@@ -22,14 +23,14 @@ def get_password_strength(password):
     base = upload_pass_base('https://beastrock.github.io/blackpass.txt')
     # inclusion from the base of bad passwords
     if password in base:
-        return print("your password is in the base of bad passwords:\n"
+        return print("Your password is in the base of bad passwords:\n"
                      "it is weak like a boxer after 10 rounds\n"
                      "password power: 1/10")
-    elif len(re.findall(password, base)) >= 1:
-        print("your password includes one or more words from  blacklist: +0 point")
+    if len(re.findall(password, base)) >= 1:
+        print("password includes one or more words from  blacklist: +0 point")
     else:
         points += 2
-        print("your password isn't in bad passwords base: +2 points")
+        print("password isn't in bad passwords base: +2 points")
     # inclusion of special characters
     if re.search("[\W\s]", password):
         points += 2
@@ -38,8 +39,7 @@ def get_password_strength(password):
         print("no special characters: 0 points")
     # the use of both upper-case and lower-case letters (case sensitivity)
     if password.islower() or password.isupper():
-        points += 1
-        print('only one case is used: +1 points')
+        print('only one case is used: 0 points')
     else:
         points += 2
         print('two cases are used: +2 points')
@@ -62,11 +62,11 @@ def get_password_strength(password):
         points += 2
         print("includes one or more digits: +2 points")
     elif (len(re.findall("[\d]", password))) == 0:
-        points += 0
         print("no digits: 0 points")
 
     message = 'Your password strength, is {}/10!'.format(points)
-    return print(message)
+    print(message)
+    return None
 
 
 if __name__ == '__main__':
