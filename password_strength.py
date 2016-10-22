@@ -11,9 +11,15 @@ def upload_pass_base(fp):
 def input_correct_password():
     FOUR_LETTERS = 4
     password = input('Input your password:\n')
+<<<<<<< HEAD
     if ' ' in password or len(password) < FOUR_LETTERS:
         print("Uncorrect input: spaces are not allowed")
         input_correct_password()
+=======
+    if ' ' in password:
+        print("Uncorrect input: spaces are not requiered")
+        input_password()
+>>>>>>> origin/master
     return password
 
 def get_password_strength(password):
@@ -23,7 +29,11 @@ def get_password_strength(password):
     # inclusion from the base of bad passwords
     if password in base:
         return print("your password is in the base of bad passwords:\n"
+<<<<<<< HEAD
                      "it is weak like a boxer after 10 rounds\n"
+=======
+                     "he is weak like a boxer after 10 rounds\n"
+>>>>>>> origin/master
                      "password power: 1/10")
     elif len(re.findall(password, base)) >= 1:
         print("your password includes one or more words from  blacklist: +0 point")
@@ -70,5 +80,9 @@ def get_password_strength(password):
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     get_password_strength(input_correct_password())
 
+=======
+    get_password_strength(input_password())
+>>>>>>> origin/master
