@@ -8,11 +8,12 @@ def upload_pass_base(fp):
 
 
 # checking passwords for the presence of spaces and tabs
-def input_password():
+def input_correct_password():
+    FOUR_LETTERS = 4
     password = input('Input your password:\n')
-    if ' ' in password:
-        print("Uncorrect input: spaces are not requiered")
-        input_password()
+    if ' ' in password or len(password) < FOUR_LETTERS:
+        print("Uncorrect input: spaces are not allowed")
+        input_correct_password()
     return password
 
 def get_password_strength(password):
@@ -22,7 +23,7 @@ def get_password_strength(password):
     # inclusion from the base of bad passwords
     if password in base:
         return print("your password is in the base of bad passwords:\n"
-                     "he is weak like a boxer after 10 rounds\n"
+                     "it is weak like a boxer after 10 rounds\n"
                      "password power: 1/10")
     elif len(re.findall(password, base)) >= 1:
         print("your password includes one or more words from  blacklist: +0 point")
@@ -42,11 +43,10 @@ def get_password_strength(password):
     else:
         points += 2
         print('two cases are used: +2 points')
-
     # estimating password length
     if len(password) >= RECOMMENDED_PASSWORD_LENGTH:
         points += 2
-        print('long password length:+2')
+        print('long password length: +2 points')
     elif len(password) < (RECOMMENDED_PASSWORD_LENGTH / 2):
         print('short password length: 0 points')
     else:
@@ -61,11 +61,14 @@ def get_password_strength(password):
     elif (len(re.findall("[\d]", password))) > 1:
         points += 2
         print("includes one or more digits: +2 points")
+    elif (len(re.findall("[\d]", password))) == 0:
+        points += 0
+        print("no digits: 0 points")
 
     message = 'Your password strength, is {}/10!'.format(points)
     return print(message)
 
 
 if __name__ == '__main__':
-    get_password_strength(input_password())
+    get_password_strength(input_correct_password())
 
