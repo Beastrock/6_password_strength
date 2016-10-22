@@ -11,9 +11,9 @@ def upload_pass_base(fp):
 def input_password():
     password = input('Input your password:\n')
     if ' ' in password:
-        print("Uncorrect input: spaces are'n requiered")
+        print("Uncorrect input: spaces are not requiered")
         input_password()
-password = 'fddsf'
+    return password
 
 def get_password_strength(password):
     points = 0
@@ -22,7 +22,7 @@ def get_password_strength(password):
     # inclusion from the base of bad passwords
     if password in base:
         return print("your password is in the base of bad passwords:\n"
-                     "he is weak like a boxer after 10 round\n"
+                     "he is weak like a boxer after 10 rounds\n"
                      "password power: 1/10")
     elif len(re.findall(password, base)) >= 1:
         print("your password includes one or more words from  blacklist: +0 point")
@@ -30,7 +30,7 @@ def get_password_strength(password):
         points += 2
         print("your password isn't in bad passwords base: +2 points")
     # inclusion of special characters
-    if re.search("[\W\S]", password):
+    if re.search("[\W\s]", password):
         points += 2
         print("included special characters: +2 points")
     else:
@@ -53,18 +53,18 @@ def get_password_strength(password):
         points += 1
         print('medium password length: +1 point')
     # inclusion of one or more numerical digits
-    if len(re.findall([\d], password)) == len(password):
+    if len(re.findall("[\d]", password)) == (len(password)):
         print("password includes only digits: 0 points")
-    elif len(re.findall([\d], password) == 1:
+    elif (len(re.findall("[\d]", password))) == 1:
         points += 1
-        print("includes one digit: 1 point"
-    elif re.findall([\d], password) > 1:
+        print("includes one digit: 1 point")
+    elif (len(re.findall("[\d]", password))) > 1:
         points += 2
         print("includes one or more digits: +2 points")
 
-    return print("password_strength:" + points + "/10")
+    message = 'Your password strength, is {}/10!'.format(points)
+    return print(message)
 
 
 if __name__ == '__main__':
-    input_password()
-    get_password_strength()
+    get_password_strength(input_password())
