@@ -17,6 +17,7 @@ def input_correct_password():
         return None
     return password
 
+
 def get_password_strength(password):
     points = 0
     RECOMMENDED_PASSWORD_LENGTH = 14
@@ -71,4 +72,3 @@ def get_password_strength(password):
 
 if __name__ == '__main__':
     get_password_strength(input_correct_password())
-
