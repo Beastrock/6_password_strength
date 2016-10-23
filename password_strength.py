@@ -11,10 +11,14 @@ def upload_pass_base(fp):
 def input_correct_password():
     FOUR_SYMBOLS = 4
     password = ''
+    i = 0
     while ((' ' in password) or len(password)) < FOUR_SYMBOLS:
-        print("Uncorrect input: using spaces or less then 4 symbols ")
-        password = input('Input your password:\n')
-        return None
+        if i > 0:
+            print('Uncorrect input')
+        i = +1
+        password = input('Passwords with spaces and less then 3 '
+                         'symbols aren\'t allowed.\nInput password:\n')
+
     return password
 
 
