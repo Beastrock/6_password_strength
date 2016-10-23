@@ -7,72 +7,85 @@ def upload_pass_base(fp):
     return r.text
 
 
-# checking passwords for the presence of spaces and tabs
-def input_correct_password():
-    FOUR_SYMBOLS = 4
-    password = ''
-    i = 0
-    while ((' ' in password) or len(password)) < FOUR_SYMBOLS:
-        if i > 0:
-            print('Uncorrect input')
-        i = +1
-        password = input('Passwords with spaces and less then 3 '
-                         'symbols aren\'t allowed.\nInput password:\n')
-
+def input_password():
+    password = input('Input password:\n')
+    while ' ' in password:
+        password = input('Spaces aren\'t allowed. Input correct password :\n')
+    print(password)
     return password
 
 
 def get_password_strength(password):
+    password_strength = 0
     points = 0
     RECOMMENDED_PASSWORD_LENGTH = 14
-    base = upload_pass_base('https://beastrock.github.io/blackpass.txt')
-    # inclusion from the base of bad passwords
-    if password in base:
-        return print("Your password is in the base of bad passwords:\n"
-                     "it is weak like a boxer after 10 rounds\n"
-                     "password power: 1/10")
-    if len(re.findall(password, base)) >= 1:
-        print("password includes one or more words from  blacklist: +0 point")
-    else:
-        points += 2
-        print("password isn't in bad passwords base: +2 points")
+    FIVE_SYMBOLS = 5
+    # recommended length
+    if len(password) >= RECOMMENDED_PASSWORD_LENGTH:
+        length = 2
+    elif (RECOMMENDED_PASSWORD_LENGTH * 0.5) <= len(password) < RECOMMENDED_PASSWORD_LENGTH:
+        length = 1
+    elif FIVE_SYMBOLS < len(password) < (RECOMMENDED_PASSWORD_LENGTH * 0.5):
+        length = 0
+
     # inclusion of special characters
     if re.search("[\W\s]", password):
-        points += 2
-        print("included special characters: +2 points")
+        special_characters = 2
     else:
-        print("no special characters: 0 points")
+        special_characters = 0
     # the use of both upper-case and lower-case letters (case sensitivity)
-    if password.islower() or password.isupper():
-        print('only one case is used: 0 points')
+    if not (password.islower() or password.isupper()):
+        case_sensitive = 2
     else:
-        points += 2
-        print('two cases are used: +2 points')
-    # estimating password length
-    if len(password) >= RECOMMENDED_PASSWORD_LENGTH:
-        points += 2
-        print('long password length: +2 points')
-    elif len(password) < (RECOMMENDED_PASSWORD_LENGTH / 2):
-        print('short password length: 0 points')
-    else:
-        points += 1
-        print('medium password length: +1 point')
-    # inclusion of one or more numerical digits
-    if len(re.findall("[\d]", password)) == (len(password)):
-        print("password includes only digits: 0 points")
-    elif (len(re.findall("[\d]", password))) == 1:
-        points += 1
-        print("includes one digit: 1 point")
-    elif (len(re.findall("[\d]", password))) > 1:
-        points += 2
-        print("includes one or more digits: +2 points")
-    elif (len(re.findall("[\d]", password))) == 0:
-        print("no digits: 0 points")
+        case_sensitive = 1
 
-    message = 'Your password strength, is {}/10!'.format(points)
+    return length, being_in_base, case_sensitive, special_characters, digits
+
+
+def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters=0, digits=0):
+    #
+    if length == 2:
+        print('long password length: +2 points')
+    elif length == 1:
+        print('medium password length: +1 point')
+    elif length == 0:
+        print('short password length: 0 points')
+    elif length == -1:
+        print('Very short password: 1/10 ')
+    #
+    if being_in_base == 2:
+        print("password isn't in bad passwords base: +2 points")
+    elif being_in_base == 0:
+        print("Password is in the base of bad passwords.\n"
+              "it is weak like a boxer after 10 rounds: 1/10\n")
+    #
+    if digits == 2:
+        print("includes one or more digits: +2 points")
+    elif digits == 0:
+        print("no digits: 0 points")
+    elif digits == 1:
+        print("includes one digit: 1 point")
+    elif digits == -1:
+        print("Password have to include letters: 1/10")
+    #
+    if special_characters == 2:
+        print("included special characters: +2 points")
+    elif special_characters == 0:
+        print("no special characters: 0 points")
+
+    if case_sensitive == 2:
+        print('two cases are used: +2 points')
+    elif case_sensitive == 0:
+        print('only one case is used: 0 points')
+
+    password_strength = sum(length, being_in_base, case_sensitive,
+                            special_characters, digits)
+    message = 'Your password strength, is {}/10!'.format()
     print(message)
-    return None
+    return password_strength
 
 
 if __name__ == '__main__':
-    get_password_strength(input_correct_password())
+    password = input_password()
+    get_password_strength(password)
+    print_result(get_password_strength(password))
