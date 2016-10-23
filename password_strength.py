@@ -71,7 +71,7 @@ def print_result(pass_properties):
         print("password is not in bad passwords base: +2 points")
     elif being_in_base == -1:
         print("Password is in the base of bad passwords.\n"
-              "it is weak like a boxer after 10 rounds: 1/10\n")
+              "It is weak like a boxer after 10 rounds: 1/10\n")
         return
     if length == 2:
         print('long password length: +2 points')
@@ -105,7 +105,7 @@ def print_result(pass_properties):
     for value in pass_properties:
         if value > 0:
             password_strength += value
-    message = 'Your password strength, is {}/10!'.format(password_strength)
+    message = 'Your password strength: {}/10!'.format(password_strength)
     print(message)
     return
 
