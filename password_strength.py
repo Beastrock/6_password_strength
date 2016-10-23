@@ -11,17 +11,13 @@ def input_password():
     password = input('Input password:\n')
     while ' ' in password:
         password = input('Spaces aren\'t allowed. Input correct password :\n')
-    print(password)
     return password
 
-    length = 0
-    being_in_base = 0
-    case_sensitive = 0
-    special_characters = 0
-    digits = 0
+
 def get_password_strength(password):
     RECOMMENDED_PASSWORD_LENGTH = 14
     FIVE_SYMBOLS = 5
+    pass_properties = []
     # recommended length
     if len(password) >= RECOMMENDED_PASSWORD_LENGTH:
         length = 2
@@ -29,12 +25,16 @@ def get_password_strength(password):
         length = 1
     elif FIVE_SYMBOLS < len(password) < (RECOMMENDED_PASSWORD_LENGTH * 0.5):
         length = 0
+    else:
+        length = -1
+    pass_properties.append(length)
     # inclusion from the base of bad passwords
     base = upload_pass_base('https://beastrock.github.io/blackpass.txt')
-    if not password in base:
+    if not (password in base):
         being_in_base = 2
     else:
         being_in_base = -1
+    pass_properties.append(being_in_base)
     # inclusion of one or more numerical digits
     if (1 < len(re.findall("[\d]", password))) < (len(password)):
         digits = 2
@@ -44,22 +44,31 @@ def get_password_strength(password):
         digits = 0
     elif len(re.findall("[\d]", password)) == (len(password)):
         digits = -1
+    pass_properties.append(digits)
     # inclusion of special characters
     if re.search("[\W\s]", password):
         special_characters = 2
     else:
         special_characters = 0
+    pass_properties.append(special_characters)
     # the use of both upper-case and lower-case letters (case sensitivity)
     if not (password.islower() or password.isupper()):
         case_sensitive = 2
     else:
         case_sensitive = 1
+    pass_properties.append(case_sensitive)
+    return pass_properties
 
-    return (length, being_in_base, case_sensitive, special_characters, digits)
 
+def print_result(pass_properties):
+    length = pass_properties[0]
+    being_in_base = pass_properties[1]
+    digits = pass_properties[2]
+    special_characters = pass_properties[3]
+    case_sensitive = pass_properties[4]
 
-def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters=0, digits=0):
-    #
+    if -1 in pass_properties:
+
     if length == 2:
         print('long password length: +2 points')
     elif length == 1:
@@ -68,12 +77,14 @@ def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters
         print('short password length: 0 points')
     elif length == -1:
         print('Very short password: 1/10 ')
+        return None
     #
     if being_in_base == 2:
         print("password isn't in bad passwords base: +2 points")
-    elif being_in_base == 0:
+    elif being_in_base == -1:
         print("Password is in the base of bad passwords.\n"
               "it is weak like a boxer after 10 rounds: 1/10\n")
+        return None
     #
     if digits == 2:
         print("includes one or more digits: +2 points")
@@ -94,14 +105,13 @@ def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters
     elif case_sensitive == 0:
         print('only one case is used: 0 points')
 
-    password_strength = length + being_in_base + case_sensitive + special_characters + digits
+    password_strength = 1
     message = 'Your password strength, is {}/10!'.format(password_strength)
     print(message)
-    return password_strength
+    return None
 
 
 if __name__ == '__main__':
     password = input_password()
-    get_password_strength(password)
     result = get_password_strength(password)
     print_result(result)
