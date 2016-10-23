@@ -114,4 +114,3 @@ if __name__ == '__main__':
     password = input_password()
     result = get_password_strength(password)
     print_result(result)
-
