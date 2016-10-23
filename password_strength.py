@@ -14,10 +14,12 @@ def input_password():
     print(password)
     return password
 
-
+    length = 0
+    being_in_base = 0
+    case_sensitive = 0
+    special_characters = 0
+    digits = 0
 def get_password_strength(password):
-    password_strength = 0
-    points = 0
     RECOMMENDED_PASSWORD_LENGTH = 14
     FIVE_SYMBOLS = 5
     # recommended length
@@ -27,7 +29,21 @@ def get_password_strength(password):
         length = 1
     elif FIVE_SYMBOLS < len(password) < (RECOMMENDED_PASSWORD_LENGTH * 0.5):
         length = 0
-
+    # inclusion from the base of bad passwords
+    base = upload_pass_base('https://beastrock.github.io/blackpass.txt')
+    if not password in base:
+        being_in_base = 2
+    else:
+        being_in_base = -1
+    # inclusion of one or more numerical digits
+    if (1 < len(re.findall("[\d]", password))) < (len(password)):
+        digits = 2
+    elif (len(re.findall("[\d]", password))) == 1:
+        digits = 1
+    elif (len(re.findall("[\d]", password))) == 0:
+        digits = 0
+    elif len(re.findall("[\d]", password)) == (len(password)):
+        digits = -1
     # inclusion of special characters
     if re.search("[\W\s]", password):
         special_characters = 2
@@ -39,7 +55,7 @@ def get_password_strength(password):
     else:
         case_sensitive = 1
 
-    return length, being_in_base, case_sensitive, special_characters, digits
+    return (length, being_in_base, case_sensitive, special_characters, digits)
 
 
 def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters=0, digits=0):
@@ -78,9 +94,8 @@ def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters
     elif case_sensitive == 0:
         print('only one case is used: 0 points')
 
-    password_strength = sum(length, being_in_base, case_sensitive,
-                            special_characters, digits)
-    message = 'Your password strength, is {}/10!'.format()
+    password_strength = length + being_in_base + case_sensitive + special_characters + digits
+    message = 'Your password strength, is {}/10!'.format(password_strength)
     print(message)
     return password_strength
 
@@ -88,4 +103,5 @@ def print_result(length=0, being_in_base=0, case_sensitive=0, special_characters
 if __name__ == '__main__':
     password = input_password()
     get_password_strength(password)
-    print_result(get_password_strength(password))
+    result = get_password_strength(password)
+    print_result(result)
