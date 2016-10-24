@@ -5,7 +5,7 @@ The result counts from __1 to 10 points__:
 1/10 - weak password, 10/10 - very strong password   
 `password_strength.py` analizes  five properties of the password. Each of them can add to strength  __+2 to 0 points__. 
 
-    They are: 
+They are: 
 * password length
 * prohibition of words found in a password blacklist
 * inclusion of one or more numerical digits
