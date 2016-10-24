@@ -17,7 +17,7 @@ They are:
 * inclusion of both upper-case and lower-case letters (case sensitivity)
 
 ## how it works##  
-To lunch the script first `pip install -r requirements.txt` then python `password_strength.py` and input your password.  
+To lunch the script first `pip install -r requirements.txt` then `python password_strength.py` and input your password.  
 
 Also you can change the blacklist.  To do this: 
   change the url in `get_password_strength` function:  
