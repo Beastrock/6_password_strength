@@ -14,10 +14,10 @@ They are:
 * inclusion of both upper-case and lower-case letters (case sensitivity)
 
 ##lunching the script 
- first `pip install -r requirements.txt` then `python password_strength.py` and input your password.
+ First `pip install -r requirements.txt` then `python password_strength.py` and input your password.
 ___
 
+##changing bad passwords base 
 Also you can change the blacklist.  To do this: 
-  change the url in function `get_password_strength` (line 21) :  
+  change the url to new txt file in function `get_password_strength` (line 21) :  
   `base = upload_pass_base('https://yoururl.txt')`
-   
