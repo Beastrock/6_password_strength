@@ -10,7 +10,7 @@ They are:
 * inclusion of one or more numerical digits
 * inclusion of special characters, such as @, #, $
 * inclusion of both upper-case and lower-case letters (case sensitivity)
-___
+***
 Also you can change the blacklist.  To do this: 
   change the url in `get_password_strength` function:
   'base = upload_pass_base('https://yoururl.txt')'
