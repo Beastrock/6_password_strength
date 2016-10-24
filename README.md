@@ -1,4 +1,5 @@
 # 6_password_strength 
+## about
   This script calculates **the strength of your password**.   
   The result counts from __1 to 10 points__:  
 1/10 - weak password  
