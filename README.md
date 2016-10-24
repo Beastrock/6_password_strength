@@ -10,7 +10,7 @@ They are:
 * prohibition of words found in a password blacklist
 * inclusion of one or more numerical digits
 * inclusion of special characters, such as @, #, $
-* inclusion of both upper-case and lower-case letters (case sensitivity)  
+* inclusion of both upper-case and lower-case letters (case sensitivity)    
 ##lunching the script 
  First `pip install -r requirements.txt` then `python password_strength.py` and input your password.  
 ##changing bad passwords base 
