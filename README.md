@@ -1,7 +1,9 @@
 # 6_password_strength 
   This script calculates **the strength of your password**.   
-  The result estimates from __1__ to __10__ points.  
+  The result estimates from __1__ to __10__ points:  
 1/10 - weak password
+|
+|
 10/10 - very strong password
 
 `password_strength.py` was analized  five properties of the pass. Each of them can give the strength +2 to 0 points.
