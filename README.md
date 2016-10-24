@@ -17,5 +17,5 @@ ___
 
 Also you can change the blacklist.  To do this: 
   change the url in `get_password_strength` function:
-  'base = upload_pass_base('https://yoururl.txt')'
+  `base = upload_pass_base('**https://yoururl.txt**')`
    
