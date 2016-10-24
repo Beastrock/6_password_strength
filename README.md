@@ -3,7 +3,7 @@
   The result counts from __1 to 10 points__:  
 1/10 - weak password  
 10/10 - very strong password  
-`password_strength.py` analizes  five properties of the password. Each of them can give the strength __+2 to 0 points__.
+`password_strength.py` analizes  five properties of the password. Each of them can add to strength  __+2 to 0 points__.
 
 They are: 
 
@@ -14,11 +14,10 @@ They are:
 * inclusion of both upper-case and lower-case letters (case sensitivity)
 
 ##lunching the script 
- first `pip install -r requirements.txt` then `python password_strength.py` and input your password.  
-
+ first `pip install -r requirements.txt` then `python password_strength.py` and input your password.
 ___
 
 Also you can change the blacklist.  To do this: 
-  change the url in `get_password_strength` function:  
+  change the url in function `get_password_strength` (line 21) :  
   `base = upload_pass_base('https://yoururl.txt')`
    
