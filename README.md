@@ -16,7 +16,8 @@ They are:
 * inclusion of special characters, such as @, #, $
 * inclusion of both upper-case and lower-case letters (case sensitivity)
 
-___
+## how it works##  
+To lunch the script first `pip install -r requirements.txt` then python `password_strength.py`,input your password.  
 
 Also you can change the blacklist.  To do this: 
   change the url in `get_password_strength` function:  
