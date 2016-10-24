@@ -1,5 +1,5 @@
 # 6_password_strength 
-  This script calculates **the strength of your password**. The result estimates from __1__ to __10__ points. 
+  This script calculates **the strength of your password**. <br> The result estimates from __1__ to __10__ points. 
 1 - weak password
 10 - very strong password
 
