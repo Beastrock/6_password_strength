@@ -1,5 +1,6 @@
 import requests
 import re
+import os
 
 
 def upload_pass_base(file_path):
@@ -11,6 +12,7 @@ def input_password():
     password = input('Input password:\n')
     while ' ' in password:
         password = input('Spaces are not allowed. Input correct password :\n')
+	os.system('cls' if os.name=='nt' else 'clear')
     return password
 
 
