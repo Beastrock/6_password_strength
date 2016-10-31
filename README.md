@@ -13,6 +13,7 @@ They are:
 * inclusion of both upper-case and lower-case letters (case sensitivity)  
 
 ## lunching
+You can launch it by typing following commands in console:    
 First `pip install -r requirements.txt` then `python password_strength.py <your_password>`
 ## changing bad passwords base  
 Also you can change the blacklist.  To do this: 
