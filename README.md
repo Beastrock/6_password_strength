@@ -19,3 +19,5 @@ First `pip install -r requirements.txt` then `python password_strength.py <your_
 Also you can change the blacklist.  To do this: 
   change the url to new txt file in function `get_password_strength`:  
 *line 21*: `base = upload_pass_base('https://yoururl.txt')`
+##safety
+Before the statistics of password properies will be printed on the screen, script clears your password from console.
