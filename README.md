@@ -20,4 +20,4 @@ Also you can change the blacklist.  To do this:
   change the url to new txt file in function `get_password_strength`:  
 *line 21*: `base = upload_pass_base('https://yoururl.txt')`
 ##safety
-"Getpass" module provides hiding your password symbols while console input
+"Getpass" module provides hiding your password symbols while console input.
